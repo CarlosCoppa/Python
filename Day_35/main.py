@@ -41,3 +41,4 @@ if will_rain:
                      to='+5493704801375'
                  )
     print(message.status)
+    

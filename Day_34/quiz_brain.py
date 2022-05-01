@@ -27,4 +27,3 @@ class QuizBrain:
         else:
             print("That's wrong.")
             return False
-
