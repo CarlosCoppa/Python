@@ -13,6 +13,21 @@ def confirm_date():
     fecha = calendar_desde.get_date()
     print(fecha.day)
 
+def validar_numeros(*args):
+    hora = hora_string.get()
+    minuto = minuto_string.get()
+    segundo = segundo_string.get()
+    
+    print(f"{hora}:{minuto}:{segundo}")
+    
+    if not hora.isnumeric() and hora != "":
+        hora_string.set(0)
+    if not minuto.isnumeric() and minuto != "":
+        minuto_string.set(0)
+    if not segundo.isnumeric() and segundo != "":
+        segundo_string.set(0)
+        
+
 # Fecha desde
 label_fecha_desde = tk.Label(root, text="Ingrese una fecha desde:", bg="#2b6777", fg="#ffffff", padx=10, pady=10)
 label_fecha_desde.grid(row=0, column=0)
@@ -24,18 +39,28 @@ calendar_desde = tkc.DateEntry(root, width=10, date_pattern="DD/MM/YYYY", border
                                padx=10)
 calendar_desde.grid(row=0, column=1)
 
-hora_string = tk.StringVar()
-minuto_string = tk.StringVar()
-segundo_string = tk.StringVar()
+hora_string = tk.StringVar(root)
+minuto_string = tk.StringVar(root)
+segundo_string = tk.StringVar(root)
 
-sb_hora = tk.Spinbox(root, from_=0, to=23, width=2, textvariable=hora_string)
+hora_hasta_string = tk.StringVar(root)
+minuto_hasta_string = tk.StringVar(root)
+segundo_hasta_string = tk.StringVar(root)
+
+sb_hora = tk.Spinbox(root, from_=0, to=23, width=3, textvariable=hora_string, wrap=True)
 sb_hora.grid(row=0, column=2)
 
-sb_minuto = tk.Spinbox(root, from_=0, to=59, width=2, textvariable=minuto_string)
+hora_string.trace("w", validar_numeros)
+
+sb_minuto = tk.Spinbox(root, from_=0, to=59, width=3, textvariable=minuto_string)
 sb_minuto.grid(row=0, column=3)
 
-sb_segundo = tk.Spinbox(root, from_=0, to=59, width=2, textvariable=minuto_string)
+minuto_string.trace("w", validar_numeros)
+
+sb_segundo = tk.Spinbox(root, from_=0, to=59, width=3, textvariable=segundo_string)
 sb_segundo.grid(row=0, column=4)
+
+segundo_string.trace("w", validar_numeros)
 
 
 
